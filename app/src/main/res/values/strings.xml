@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Xplorer</string>
+    <string name="startup_screen_start">Start</string>
+    <string name="startup_screen_statistics">Statistics</string>
+    <string name="startup_screen_settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="difficulty_label">Difficulty:</string>
+    <string name="okay_label">Okay</string>
+    <string name="begin_label">Begin</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="resume_label">Resume</string>
+    <string name="give_up_label">Choose Another Goal</string>
+    <string name="found_it_label">I Found it!</string>
+    <string name="congratulations_label">Congratulations, you win!</string>
+    <string name="try_again_label">Try again...</string>
+    <string name="play_again_label">Play again!</string>
+    <string name="reset_statistics_label">Reset statistics</string>
+</resources>
