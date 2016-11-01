@@ -5,5 +5,6 @@ package com.xplorer;
  */
 public enum PreferencesName {
     DifficultyLevel,
-    validateGoalMinDistance
+    validateGoalMinDistance,
+    radiusDistance
 }

@@ -26,7 +26,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
-public class GoalSeekingMapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
+public class GoalSeekingMapActivity extends FragmentActivity
+        implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+                   GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private GoogleMap map_;
     private GoogleApiClient mGoogleApiClient;

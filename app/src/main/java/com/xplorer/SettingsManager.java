@@ -6,6 +6,7 @@ package com.xplorer;
 public class SettingsManager {
     private static SettingsManager instance;
     private int validateGoalMinDistance_;
+    private int radiusDistance;
     private Difficulty currentDifficulty_;
 
     private SettingsManager(){
@@ -13,6 +14,12 @@ public class SettingsManager {
             validateGoalMinDistance_ = ApplicationWithPreference.getIntData(PreferencesName.validateGoalMinDistance.name()); // in meters
         } else {
             validateGoalMinDistance_ = 200;
+        }
+
+        if(ApplicationWithPreference.getIntData(PreferencesName.radiusDistance.name()) != -1) {// -1 is the default value
+            radiusDistance = ApplicationWithPreference.getIntData(PreferencesName.radiusDistance.name()); // in meters
+        } else {
+            radiusDistance = 1000; // the radius distance in meter
         }
 
         if(ApplicationWithPreference.getIntData(PreferencesName.DifficultyLevel.name()) != -1) {// -1 is the default value
@@ -30,7 +37,11 @@ public class SettingsManager {
     }
 
     public int getValidateGoalMinDistance(){
-        return validateGoalMinDistance_;
+        return this.validateGoalMinDistance_;
+    }
+
+    public int getRadiusDistance(){
+        return this.radiusDistance;
     }
 
     public Difficulty getCurrentDifficulty(){
@@ -38,8 +49,13 @@ public class SettingsManager {
     }
 
     public void setValidateGoalMinDistance(Integer value){
-        validateGoalMinDistance_ = value;
+        this.validateGoalMinDistance_ = value;
         ApplicationWithPreference.saveIntData(PreferencesName.validateGoalMinDistance.name(), value);
+    }
+
+    public void setRadiusDistance(Integer value){
+        this.radiusDistance = value;
+        ApplicationWithPreference.saveIntData(PreferencesName.radiusDistance.name(), value);
     }
 
     public void setCurrentDifficulty(Difficulty value){
