@@ -32,6 +32,7 @@ public class GoalSeekingMapActivity extends FragmentActivity implements OnMapRea
     private GoogleApiClient mGoogleApiClient;
     private Location currentLocation;
     private final int REQUEST_PERMISSION_PHONE_STATE = 1; // constant for the permission callack
+    private final float MIN_ZOOM_LEVEL = 14f;
     private final float MAX_ZOOM_LEVEL = 14f;
 
 
@@ -77,7 +78,7 @@ public class GoalSeekingMapActivity extends FragmentActivity implements OnMapRea
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map_ = googleMap;
-        map_.setMinZoomPreference(MAX_ZOOM_LEVEL);
+        map_.setMinZoomPreference(MIN_ZOOM_LEVEL);
         map_.setMaxZoomPreference(MAX_ZOOM_LEVEL);
         map_.getUiSettings().setScrollGesturesEnabled(false);
     }

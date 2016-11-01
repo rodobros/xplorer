@@ -11,6 +11,7 @@ public class PlaceOfInterest {
     private Double latitude_;
     private String name_;
     private int drawableID_;
+    private int thumbnailID_;
 
     PlaceOfInterest(String name, Double latitude, Double longitude, int drawableID){
         name_ = name;
