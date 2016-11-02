@@ -25,8 +25,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.xplorer.manager.PlacesOfInterestManager;
 
-public class GoalSeekingMapActivity extends FragmentActivity
+public class MapGoalSeekingActivity extends FragmentActivity
         implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
                    GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
@@ -144,7 +145,7 @@ public class GoalSeekingMapActivity extends FragmentActivity
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     startLocationUpdates();
                 } else {
-                    Toast.makeText(GoalSeekingMapActivity.this, "Permission Denied!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MapGoalSeekingActivity.this, "Permission Denied!", Toast.LENGTH_SHORT).show();
                 }
         }
     }

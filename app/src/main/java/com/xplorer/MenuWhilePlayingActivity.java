@@ -20,7 +20,7 @@ public class MenuWhilePlayingActivity extends AppCompatActivity {
 
 
     public void onResumeClick(View v){
-        Intent i=new Intent(this, GoalSeekingMapActivity.class);
+        Intent i=new Intent(this, MapGoalSeekingActivity.class);
         startActivity(i);
     }
 }

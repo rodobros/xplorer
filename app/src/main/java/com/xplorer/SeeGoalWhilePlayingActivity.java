@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.xplorer.manager.PlacesOfInterestManager;
+import com.xplorer.manager.SettingsManager;
+
 public class SeeGoalWhilePlayingActivity extends AppCompatActivity {
     Double currentLong_;
     Double currentLat_;
@@ -41,6 +44,7 @@ public class SeeGoalWhilePlayingActivity extends AppCompatActivity {
         Log.d("latlongs before", "start:" + currentLat_+ ":" + currentLong_ + " end:" + PlacesOfInterestManager.getInstance().getCurrentGoal().getLatitude() + ":" + PlacesOfInterestManager.getInstance().getCurrentGoal().getLongitude());
         Location.distanceBetween(currentLat_, currentLong_,PlacesOfInterestManager.getInstance().getCurrentGoal().getLatitude(),PlacesOfInterestManager.getInstance().getCurrentGoal().getLongitude(), results);
         Log.d("distance calculated", "" + results[0]);
+
         boolean foundIt = results[0] < SettingsManager.getInstance().getValidateGoalMinDistance();
         if(foundIt){
             Toast.makeText(SeeGoalWhilePlayingActivity.this, "You found it! good job!", Toast.LENGTH_SHORT).show();

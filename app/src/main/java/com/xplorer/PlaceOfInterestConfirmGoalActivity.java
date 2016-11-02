@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.xplorer.manager.PlacesOfInterestManager;
+
 public class PlaceOfInterestConfirmGoalActivity extends AppCompatActivity {
 
     @Override
@@ -37,7 +39,7 @@ public class PlaceOfInterestConfirmGoalActivity extends AppCompatActivity {
     }
 
     public void onBeginGameClick(View v) {
-        Intent i=new Intent(this, GoalSeekingMapActivity.class);
+        Intent i=new Intent(this, MapGoalSeekingActivity.class);
         startActivity(i);
     }
 }

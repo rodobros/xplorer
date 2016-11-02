@@ -1,7 +1,10 @@
-package com.xplorer;
+package com.xplorer.manager;
 
-import android.app.LocalActivityManager;
 import android.location.Location;
+
+import com.xplorer.business.PlaceOfInterest;
+import com.xplorer.R;
+import com.xplorer.util.ApplicationSharedPreference;
 
 import java.util.ArrayList;
 
@@ -21,18 +24,18 @@ public class PlacesOfInterestManager {
     }
 
     private void addNewPlaceOfInterest(PlaceOfInterest value) {
-        if(!ApplicationWithPreference.getBoolData(value.getName() + "isValidated")) {
+        if(!ApplicationSharedPreference.getBoolData(value.getName() + "isValidated")) {
             listOfPlacesOfInterest.add(value);
         }
     }
 
     public void setPlaceOfInterestFound(PlaceOfInterest value) {
-        ApplicationWithPreference.saveBoolData(value.getName() + "isValidated", Boolean.TRUE);
+        ApplicationSharedPreference.saveBoolData(value.getName() + "isValidated", Boolean.TRUE);
         listOfPlacesOfInterest.remove(value);
     }
 
     private void resetPlaceOfInterest(PlaceOfInterest value) {
-        ApplicationWithPreference.saveBoolData(value.getName() + "isValidated", Boolean.FALSE);
+        ApplicationSharedPreference.saveBoolData(value.getName() + "isValidated", Boolean.FALSE);
     }
 
     public void resetPlacesFound() {
@@ -60,11 +63,13 @@ public class PlacesOfInterestManager {
     public ArrayList<PlaceOfInterest> getListOfClosePlacesOfInterest(Double latitude, Double longitude) {
         PlaceOfInterest currentPlace ;
         float[] results = new float[1];
+        listOfClosePlacesOfInterest.clear();
 
         for(int i = 0 ; i < listOfPlacesOfInterest.size() ; ++i) {
             currentPlace = listOfPlacesOfInterest.get(i);
             Location.distanceBetween(latitude, longitude, currentPlace.getLatitude(), currentPlace.getLongitude(), results);
-            if (results[0] < SettingsManager.getInstance().getRadiusDistance()) {
+            if (results[0] < SettingsManager.getInstance().getRadiusDistance()
+                    && !ApplicationSharedPreference.getBoolData(currentPlace.getName() + "isValidated")) {
                 listOfClosePlacesOfInterest.add(currentPlace);
             }
         }

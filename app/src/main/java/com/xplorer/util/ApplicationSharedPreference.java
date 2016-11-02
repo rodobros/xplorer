@@ -1,4 +1,4 @@
-package com.xplorer;
+package com.xplorer.util;
 
 import android.app.Application;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
 /**
  * Created by Rodobros on 2016-10-23.
  */
-public class ApplicationWithPreference extends Application {
+public class ApplicationSharedPreference extends Application {
 
     @Override
     public void onCreate() {

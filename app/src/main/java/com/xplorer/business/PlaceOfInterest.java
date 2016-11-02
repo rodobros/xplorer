@@ -1,4 +1,4 @@
-package com.xplorer;
+package com.xplorer.business;
 
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -11,20 +11,19 @@ public class PlaceOfInterest {
     private Double latitude_;
     private String name_;
     private int drawableID_;
-    private int thumbnailID_;
 
-    PlaceOfInterest(String name, Double latitude, Double longitude, int drawableID){
+    public PlaceOfInterest(String name, Double latitude, Double longitude, int drawableID){
         name_ = name;
         longitude_ = longitude;
         latitude_ = latitude;
         drawableID_ = drawableID;
     }
 
-    Double getLongitude(){
+    public Double getLongitude(){
         return longitude_;
     }
 
-    Double getLatitude(){
+    public Double getLatitude(){
         return latitude_;
     }
 
@@ -36,11 +35,11 @@ public class PlaceOfInterest {
         latitude_ = value;
     }
 
-    String getName(){
+    public String getName(){
         return name_;
     }
 
-    int getDrawableID() {
+    public int getDrawableID() {
         return drawableID_;
     }
 }

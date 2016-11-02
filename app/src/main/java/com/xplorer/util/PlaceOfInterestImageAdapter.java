@@ -1,4 +1,4 @@
-package com.xplorer;
+package com.xplorer.util;
 
 import android.content.Context;
 import android.widget.BaseAdapter;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.GridView;
+
+import com.xplorer.business.PlaceOfInterest;
 
 import java.util.ArrayList;
 

@@ -12,7 +12,38 @@
     <string name="give_up_label">Choose Another Goal</string>
     <string name="found_it_label">I Found it!</string>
     <string name="congratulations_label">Congratulations, you win!</string>
-    <string name="try_again_label">Try again...</string>
+    <string name="try_again_label">Try again…</string>
     <string name="play_again_label">Play again!</string>
     <string name="reset_statistics_label">Reset statistics</string>
+    <string name="radius">Radius :</string>
+    <string name="save">Save</string>
+    <string name="settings">Settings</string>
+    <string name="settingsTVRadius">Places of interest within a Radius of :</string>
+    <string name="settingsNbOfValidation">Number of validation</string>
+    <string name="settingsNbOfCheck">Number of check</string>
+    <string name="settings_type_of_information">Type of information :</string>
+    <string name="settingsTimer">Timer</string>
+    <string-array name="settingsDifficultyList">
+        <item>Easy</item>
+        <item>Normal</item>
+        <item>Hard</item>
+        <item>Personal</item>
+    </string-array>
+    <string-array name="settingsRadiusList">
+        <item>1 KM</item>
+        <item>2.5 KM</item>
+        <item>10 KM</item>
+        <item>Unlimited</item>
+    </string-array>
+    <string-array name="settingsTypeOfInformation">
+        <item>Title + Image</item>
+        <item>Image</item>
+        <item>Randomized Image</item>
+    </string-array>
+    <string-array name="settingsTimer">
+        <item>None</item>
+        <item>1 Hour</item>
+        <item>3 Hours</item>
+        <item>10 Hours</item>
+    </string-array>
 </resources>
