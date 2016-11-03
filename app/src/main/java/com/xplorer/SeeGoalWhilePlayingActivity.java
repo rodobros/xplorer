@@ -52,7 +52,7 @@ public class SeeGoalWhilePlayingActivity extends AppCompatActivity {
             Intent i=new Intent(this, MainMenuActivity.class);
             startActivity(i);
         } else {
-            Toast.makeText(SeeGoalWhilePlayingActivity.this, "Try again!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SeeGoalWhilePlayingActivity.this, "Try again! You're bad !", Toast.LENGTH_SHORT).show();
         }
     }
 
