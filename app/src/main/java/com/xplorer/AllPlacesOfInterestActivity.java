@@ -192,7 +192,7 @@ public class AllPlacesOfInterestActivity extends AppCompatActivity
         }
     }
 
-
+// lama
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
