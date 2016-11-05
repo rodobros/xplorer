@@ -8,8 +8,12 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.xplorer.business.PlaceOfInterest;
+import com.xplorer.business.TypeOfInformation;
 import com.xplorer.manager.PlacesOfInterestManager;
+import com.xplorer.manager.SettingsManager;
 
 public class PlaceOfInterestConfirmGoalActivity extends AppCompatActivity {
 
@@ -17,14 +21,18 @@ public class PlaceOfInterestConfirmGoalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_of_interest_confirm_goal);
-
-        Intent i = getIntent();
-        ((ImageView)findViewById(R.id.imageChoiceConfirm)).setImageResource(PlacesOfInterestManager.getInstance().getCurrentGoal().getDrawableID());
         ActionBar a = getActionBar();
         if(a != null) {
             a.setDisplayHomeAsUpEnabled(true);
-
         }
+
+        TextView textViewTitlePlace = (TextView) findViewById(R.id.confirm_goal_title_place);
+        if (SettingsManager.getInstance().getTypeOfInformation() == TypeOfInformation.TitleWithImage) {
+            textViewTitlePlace.setText(PlacesOfInterestManager.getInstance().getCurrentGoal().getName());
+        }
+
+        ((ImageView)findViewById(R.id.imageChoiceConfirm)).setImageResource(PlacesOfInterestManager.getInstance().getCurrentGoal().getDrawableID());
+
     }
 
     @Override

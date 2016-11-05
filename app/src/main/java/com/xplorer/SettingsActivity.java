@@ -2,6 +2,7 @@ package com.xplorer;
 
 import android.app.ActionBar;
 import android.support.v4.app.NavUtils;
+import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -17,6 +18,8 @@ import com.xplorer.business.Difficulty;
 import com.xplorer.business.TypeOfInformation;
 import com.xplorer.manager.SettingsManager;
 
+import java.util.ArrayList;
+
 public class SettingsActivity extends AppCompatActivity
         implements OnItemSelectedListener {
 
@@ -27,6 +30,14 @@ public class SettingsActivity extends AppCompatActivity
     EditText editTextNbOfValidation;
     EditText editTextNbOfCheck;
     SettingsManager settingsManager;
+
+    // TODO use ArrayList of data for difficulty level instead of direct value
+    // Need to change all switch case to if, as switch don't allow compute data
+    // list for knowing the level depending on the difficulty
+    ArrayList<Integer> nbOfValidationList;
+    ArrayList<Integer> nbOfCheckList;
+    ArrayList<Integer> timerList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

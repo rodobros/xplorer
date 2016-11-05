@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -26,11 +27,14 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.xplorer.business.PlaceOfInterest;
 import com.xplorer.manager.PlacesOfInterestManager;
+import com.xplorer.manager.SettingsManager;
 import com.xplorer.util.PlaceOfInterestImageAdapter;
 
 public class AllPlacesOfInterestActivity extends AppCompatActivity
         implements  GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, LocationListener {
+
+    private TextView textViewDistance;
 
     private PlaceOfInterestImageAdapter myPlaceOfInterestImageAdapter;
     private GoogleApiClient mGoogleApiClient;
@@ -45,6 +49,22 @@ public class AllPlacesOfInterestActivity extends AppCompatActivity
         ActionBar a = getActionBar();
         if (a != null) {
             a.setDisplayHomeAsUpEnabled(true);
+        }
+
+        //set the text view
+        textViewDistance = (TextView) findViewById(R.id.all_places_within_radius);
+        switch (SettingsManager.getInstance().getRadiusDistance()) {
+            case 1000 :
+                textViewDistance.setText("Select a place of interest (within 1 KM):");
+                break;
+            case 2500 :
+                textViewDistance.setText("Select a place of interest (within 2.5 KM):");
+                break;
+            case 10000 :
+                textViewDistance.setText("Select a place of interest (within 10 KM):");
+                break;
+            default:
+                textViewDistance.setText("Select a place of Interest:");
         }
 
 

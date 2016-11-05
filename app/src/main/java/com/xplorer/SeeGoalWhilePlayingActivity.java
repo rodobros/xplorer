@@ -10,8 +10,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.xplorer.business.TypeOfInformation;
 import com.xplorer.manager.PlacesOfInterestManager;
 import com.xplorer.manager.SettingsManager;
 
@@ -29,6 +31,12 @@ public class SeeGoalWhilePlayingActivity extends AppCompatActivity {
             a.setDisplayHomeAsUpEnabled(true);
 
         }
+
+        TextView textViewTitlePlace = (TextView) findViewById(R.id.goal_while_playing_title_place);
+        if (SettingsManager.getInstance().getTypeOfInformation() == TypeOfInformation.TitleWithImage) {
+            textViewTitlePlace.setText(PlacesOfInterestManager.getInstance().getCurrentGoal().getName());
+        }
+
 
         Intent i = getIntent();
 
