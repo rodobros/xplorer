@@ -1,7 +1,6 @@
 package com.xplorer;
 
 import android.app.ActionBar;
-import android.content.Intent;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -221,6 +220,8 @@ public class SettingsActivity extends AppCompatActivity
                 break;
         }
 
+        Toast.makeText(this, "Settings saved", Toast.LENGTH_LONG).show();
+
     }
 
     @Override
@@ -229,14 +230,13 @@ public class SettingsActivity extends AppCompatActivity
         String strCheck;
         switch (this.spinnerDifficulty.getSelectedItem().toString()) {
             case "Easy":
-                Toast.makeText(this, "Easy selected", Toast.LENGTH_LONG).show();
                 strValidation = "" + 1000;
                 this.editTextNbOfValidation.setText(strValidation);
                 strCheck = "" + 1000;
                 this.editTextNbOfCheck.setText(strCheck);
                 this.spinnerTypeOfInformation.setSelection(0);
                 this.spinnerTimer.setSelection(0);
-                setVisibilityPersonalizablefields(View.GONE);
+                setEditablePersonalizableFields(false);
                 break;
             case "Normal":
                 strValidation = "" + 5;
@@ -245,7 +245,7 @@ public class SettingsActivity extends AppCompatActivity
                 this.editTextNbOfCheck.setText(strCheck);
                 this.spinnerTypeOfInformation.setSelection(1);
                 this.spinnerTimer.setSelection(3);
-                setVisibilityPersonalizablefields(View.GONE);
+                setEditablePersonalizableFields(false);
                 break;
             case "Hard":
                 strValidation = "" + 3;
@@ -254,30 +254,34 @@ public class SettingsActivity extends AppCompatActivity
                 this.editTextNbOfCheck.setText(strCheck);
                 this.spinnerTypeOfInformation.setSelection(2);
                 this.spinnerTimer.setSelection(1);
-                setVisibilityPersonalizablefields(View.GONE);
+                setEditablePersonalizableFields(false);
                 break;
             case "Personal":
-                setVisibilityPersonalizablefields(View.VISIBLE);
+                setEditablePersonalizableFields(true);
                 break;
         }
 
     }
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        //Toast.makeText(this, "Spinner clicked " + parent.toString(), Toast.LENGTH_LONG).show();
     }
 
     /**
+     *  To enable or not the modification of fields :
+     *  - editTextNbOfValidation
+     *  - editTextNbOfCheck
+     *  - spinnerTypeOfInformation
+     *  - spinnerTimer
      *
-     * @param viewVisibility View.GONE or View.VISIBLE
+     *  Use when it's on personal difficulty or preset difficulty
+     *
+     * @param bool if these elements are enabled or not
      */
-    private void setVisibilityPersonalizablefields(int viewVisibility) {
-        if (viewVisibility == View.GONE || viewVisibility == View.VISIBLE) {
-            this.editTextNbOfValidation.setVisibility(viewVisibility);
-            this.editTextNbOfCheck.setVisibility(viewVisibility);
-            this.spinnerTypeOfInformation.setVisibility(viewVisibility);
-            this.spinnerTimer.setVisibility(viewVisibility);
-        }
+    private void setEditablePersonalizableFields(boolean bool) {
+        this.editTextNbOfValidation.setEnabled(bool);
+        this.editTextNbOfCheck.setEnabled(bool);
+        this.spinnerTypeOfInformation.setEnabled(bool);
+        this.spinnerTimer.setEnabled(bool);
 
     }
 
