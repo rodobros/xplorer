@@ -26,6 +26,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.xplorer.manager.PlacesOfInterestManager;
+import com.xplorer.manager.SettingsManager;
 
 public class MapGoalSeekingActivity extends FragmentActivity
         implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
@@ -34,6 +35,7 @@ public class MapGoalSeekingActivity extends FragmentActivity
     private GoogleMap map_;
     private GoogleApiClient mGoogleApiClient;
     private Location currentLocation;
+    private Location previousLocation;
     private final int REQUEST_PERMISSION_PHONE_STATE = 1; // constant for the permission callack
     private final float MIN_ZOOM_LEVEL = 14f;
     private final float MAX_ZOOM_LEVEL = 14f;
@@ -99,6 +101,28 @@ public class MapGoalSeekingActivity extends FragmentActivity
             i.putExtra("currentLatitude", currentLocation.getLatitude());
         }
         startActivity(i);
+    }
+
+    public void onHotOrColdClick(View v) {
+
+        if(previousLocation== null) {
+             Toast.makeText(MapGoalSeekingActivity.this, "You have to move to use the hot or cold function!", Toast.LENGTH_SHORT).show();
+        }    else {
+
+            float[] resultsNow = new float[1];
+            float[] resultsPrev = new float[1];
+            Location.distanceBetween(currentLocation.getLatitude(), currentLocation.getLongitude(), PlacesOfInterestManager.getInstance().getCurrentGoal().getLatitude(), PlacesOfInterestManager.getInstance().getCurrentGoal().getLongitude(), resultsNow);
+            Location.distanceBetween(previousLocation.getLatitude(), previousLocation.getLongitude(), PlacesOfInterestManager.getInstance().getCurrentGoal().getLatitude(), PlacesOfInterestManager.getInstance().getCurrentGoal().getLongitude(), resultsPrev);
+
+            boolean shorterDistance = resultsNow[0] < resultsPrev[0];
+            if (shorterDistance) {
+                Toast.makeText(MapGoalSeekingActivity.this, "It's getting warmer!", Toast.LENGTH_SHORT).show();
+
+            } else {
+                Toast.makeText(MapGoalSeekingActivity.this, "It's getting colder!", Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 
     // google play service onConnected method (google play service provides location tracking)
@@ -190,6 +214,7 @@ public class MapGoalSeekingActivity extends FragmentActivity
 
     @Override
     public void onLocationChanged(Location location) {
+        previousLocation = currentLocation;
         currentLocation = location;
         //updateUI();
         try {
