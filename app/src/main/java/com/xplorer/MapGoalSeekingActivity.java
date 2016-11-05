@@ -25,6 +25,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.xplorer.business.PlaceOfInterest;
 import com.xplorer.manager.PlacesOfInterestManager;
 
 public class MapGoalSeekingActivity extends FragmentActivity
@@ -33,11 +34,14 @@ public class MapGoalSeekingActivity extends FragmentActivity
 
     private GoogleMap map_;
     private GoogleApiClient mGoogleApiClient;
-    private Location currentLocation;
-    private Location previousLocation;
     private final int REQUEST_PERMISSION_PHONE_STATE = 1; // constant for the permission callack
     private final float MIN_ZOOM_LEVEL = 14f;
     private final float MAX_ZOOM_LEVEL = 14f;
+
+    private boolean updateUIFirstTime = true;
+    private Location currentLocation;
+    private Location previousLocation;
+
 
 
     @Override
@@ -101,9 +105,9 @@ public class MapGoalSeekingActivity extends FragmentActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map_ = googleMap;
-        map_.setMinZoomPreference(MIN_ZOOM_LEVEL);
-        map_.setMaxZoomPreference(MAX_ZOOM_LEVEL);
-        map_.getUiSettings().setScrollGesturesEnabled(false);
+        //map_.setMinZoomPreference(MIN_ZOOM_LEVEL);
+        //map_.setMaxZoomPreference(MAX_ZOOM_LEVEL);
+        //map_.getUiSettings().setScrollGesturesEnabled(false);
     }
 
     // click events handlers:
@@ -125,20 +129,44 @@ public class MapGoalSeekingActivity extends FragmentActivity
 
         if(previousLocation== null) {
              Toast.makeText(MapGoalSeekingActivity.this, "You have to move to use the hot or cold function!", Toast.LENGTH_SHORT).show();
-        }    else {
+        } else {
 
-            float[] resultsNow = new float[1];
-            float[] resultsPrev = new float[1];
-            Location.distanceBetween(currentLocation.getLatitude(), currentLocation.getLongitude(), PlacesOfInterestManager.getInstance().getCurrentGoal().getLatitude(), PlacesOfInterestManager.getInstance().getCurrentGoal().getLongitude(), resultsNow);
-            Location.distanceBetween(previousLocation.getLatitude(), previousLocation.getLongitude(), PlacesOfInterestManager.getInstance().getCurrentGoal().getLatitude(), PlacesOfInterestManager.getInstance().getCurrentGoal().getLongitude(), resultsPrev);
+            int numberOfCheck = PlacesOfInterestManager.getInstance().getCurrentNumberOfCheck();
 
-            boolean shorterDistance = resultsNow[0] < resultsPrev[0];
-            if (shorterDistance) {
-                Toast.makeText(MapGoalSeekingActivity.this, "It's getting warmer!", Toast.LENGTH_SHORT).show();
+            if ( numberOfCheck > 0 ) {
+                // compute the hot cold
+                float[] resultsNow = new float[1];
+                float[] resultsPrev = new float[1];
+                Location.distanceBetween(currentLocation.getLatitude(), currentLocation.getLongitude(), PlacesOfInterestManager.getInstance().getCurrentGoal().getLatitude(), PlacesOfInterestManager.getInstance().getCurrentGoal().getLongitude(), resultsNow);
+                Location.distanceBetween(previousLocation.getLatitude(), previousLocation.getLongitude(), PlacesOfInterestManager.getInstance().getCurrentGoal().getLatitude(), PlacesOfInterestManager.getInstance().getCurrentGoal().getLongitude(), resultsPrev);
 
-            } else {
-                Toast.makeText(MapGoalSeekingActivity.this, "It's getting colder!", Toast.LENGTH_SHORT).show();
+                boolean shorterDistance = resultsNow[0] < resultsPrev[0];
+                if (shorterDistance) {
+                    Toast.makeText(MapGoalSeekingActivity.this, "It's getting warmer!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MapGoalSeekingActivity.this, "It's getting colder!", Toast.LENGTH_SHORT).show();
+                }
+
+                // actualize the number of hot cold check
+                numberOfCheck --;
+                PlacesOfInterestManager.getInstance().setCurrentNumberOfCheck(numberOfCheck);
+
+                if( numberOfCheck == 0 ) {
+                    Toast.makeText(this, "That was you last chance.\n" + "" +
+                            "You still can use the thermometer ", Toast.LENGTH_SHORT).show();
+                }
+                else if( numberOfCheck == 1 ) {
+                    Toast.makeText(this, "It's your last chance to use the HOT/COLD button !", Toast.LENGTH_SHORT).show();
+                }
+                else if( numberOfCheck < 6 ) {
+                    Toast.makeText(this, "Be careful you have " + numberOfCheck + " remaining check !", Toast.LENGTH_SHORT).show();
+                }
             }
+            else {
+                Toast.makeText(this, "Sorry, you already use all your possible check.\n" +
+                        "You still can use the thermometer ", Toast.LENGTH_LONG).show();
+            }
+
         }
 
     }
@@ -234,7 +262,6 @@ public class MapGoalSeekingActivity extends FragmentActivity
     public void onLocationChanged(Location location) {
         previousLocation = currentLocation;
         currentLocation = location;
-        //updateUI();
         try {
             map_.setMyLocationEnabled(true);
             updateUI();
@@ -245,7 +272,8 @@ public class MapGoalSeekingActivity extends FragmentActivity
 
     private void updateUI() {
         // update map here
-        if(map_ != null) {
+        if(map_ != null && updateUIFirstTime) {
+            updateUIFirstTime = false;
             map_.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(this.currentLocation.getLatitude(), this.currentLocation.getLongitude()), MAX_ZOOM_LEVEL));
         }
     }

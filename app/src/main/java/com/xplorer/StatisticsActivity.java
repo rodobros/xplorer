@@ -35,7 +35,7 @@ public class StatisticsActivity extends AppCompatActivity {
     }
 
     public void onClickReset(View v) {
-        PlacesOfInterestManager.getInstance().resetPlacesFound();
+        PlacesOfInterestManager.getInstance().resetAllPlacesFound();
         Toast.makeText(StatisticsActivity.this, "data have been reset", Toast.LENGTH_SHORT).show();
     }
 }

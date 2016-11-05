@@ -95,6 +95,10 @@ public class AllPlacesOfInterestActivity extends AppCompatActivity
     }
 
 
+
+
+    ////////////////////// GETTING THE LOCATION /////////////////////////////
+
     // google play service onConnected method (google play service provides location tracking)
     @Override
     public void onConnected(Bundle connectionHint) {
@@ -187,6 +191,7 @@ public class AllPlacesOfInterestActivity extends AppCompatActivity
         currentLocation = location;
         this.initializeGridView();
     }
+    ////////////////////// END GETTING THE LOCATION /////////////////////////////
 
     /**
      * Method called when the location is initialized
@@ -196,7 +201,8 @@ public class AllPlacesOfInterestActivity extends AppCompatActivity
             myPlaceOfInterestImageAdapter = new PlaceOfInterestImageAdapter(this);
             myPlaceOfInterestImageAdapter.addPlacesOfInterest(
                     PlacesOfInterestManager.getInstance().getListOfClosePlacesOfInterest(
-                            currentLocation.getLatitude(), currentLocation.getLongitude()));
+                            currentLocation.getLatitude(), currentLocation.getLongitude(),
+                            SettingsManager.getInstance().getRadiusDistance()));
 
             GridView gridview = (GridView) findViewById(R.id.imageGridView);
             gridview.setAdapter(myPlaceOfInterestImageAdapter);
@@ -212,7 +218,6 @@ public class AllPlacesOfInterestActivity extends AppCompatActivity
         }
     }
 
-// lama
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -227,7 +232,8 @@ public class AllPlacesOfInterestActivity extends AppCompatActivity
 
     public void onClickItem(int position){
         PlaceOfInterest chosenLocation = ((PlaceOfInterest) myPlaceOfInterestImageAdapter.getItem(position));
-        PlacesOfInterestManager.getInstance().setCurrentGoal(chosenLocation);
+        PlacesOfInterestManager.getInstance().startNewGoal(chosenLocation);
+
         Intent i = new Intent(this, PlaceOfInterestConfirmGoalActivity.class);
         startActivity(i);
     }
