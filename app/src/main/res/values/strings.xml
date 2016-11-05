@@ -23,6 +23,8 @@
     <string name="settingsNbOfCheck">Number of check</string>
     <string name="settings_type_of_information">Type of information :</string>
     <string name="settingsTimer">Timer</string>
+    <string name="game_lost">You loose the game.</string>
+    <string name="back_to_menu">Back To Menu</string>
     <string-array name="settingsDifficultyList">
         <item>Easy</item>
         <item>Normal</item>

@@ -48,6 +48,9 @@ public class SeeGoalWhilePlayingActivity extends AppCompatActivity {
 
 
     public void onFoundItClick(View v){
+
+        int nbOfValidation = PlacesOfInterestManager.getInstance().getCurrentNumberOfValidation();
+
         float[] results = new float[1];
         Log.d("latlongs before", "start:" + currentLat_+ ":" + currentLong_ + " end:" + PlacesOfInterestManager.getInstance().getCurrentGoal().getLatitude() + ":" + PlacesOfInterestManager.getInstance().getCurrentGoal().getLongitude());
         Location.distanceBetween(currentLat_, currentLong_,PlacesOfInterestManager.getInstance().getCurrentGoal().getLatitude(),PlacesOfInterestManager.getInstance().getCurrentGoal().getLongitude(), results);
@@ -60,7 +63,18 @@ public class SeeGoalWhilePlayingActivity extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
             startActivity(intent);
         } else {
-            Toast.makeText(SeeGoalWhilePlayingActivity.this, "Try again!", Toast.LENGTH_SHORT).show();
+            nbOfValidation --;
+            if (nbOfValidation > 0) {
+                Toast.makeText(SeeGoalWhilePlayingActivity.this, "Try again!", Toast.LENGTH_SHORT).show();
+                PlacesOfInterestManager.getInstance().setCurrentNumberOfValidation(nbOfValidation);
+                if (nbOfValidation < 10) {
+                    Toast.makeText(this, "You have " + nbOfValidation + " remaining try.", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Intent intent = new Intent(getApplicationContext(), GameLostActivity.class);
+                intent.putExtra("Type of Lost", "nbOfValidation");
+                startActivity(intent);
+            }
         }
     }
 
