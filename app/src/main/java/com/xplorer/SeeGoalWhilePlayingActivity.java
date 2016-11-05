@@ -57,10 +57,10 @@ public class SeeGoalWhilePlayingActivity extends AppCompatActivity {
         if(foundIt){
             Toast.makeText(SeeGoalWhilePlayingActivity.this, "You found it! good job!", Toast.LENGTH_SHORT).show();
             PlacesOfInterestManager.getInstance().setPlaceOfInterestFound(PlacesOfInterestManager.getInstance().getCurrentGoal());
-            Intent i=new Intent(this, MainMenuActivity.class);
-            startActivity(i);
+            Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+            startActivity(intent);
         } else {
-            Toast.makeText(SeeGoalWhilePlayingActivity.this, "Try again! You're bad !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SeeGoalWhilePlayingActivity.this, "Try again!", Toast.LENGTH_SHORT).show();
         }
     }
 

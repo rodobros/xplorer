@@ -47,7 +47,7 @@ public class PlaceOfInterestConfirmGoalActivity extends AppCompatActivity {
     }
 
     public void onBeginGameClick(View v) {
-        Intent i=new Intent(this, MapGoalSeekingActivity.class);
-        startActivity(i);
+        Intent intent = new Intent(getApplicationContext(), MapGoalSeekingActivity.class);
+        startActivity(intent);
     }
 }

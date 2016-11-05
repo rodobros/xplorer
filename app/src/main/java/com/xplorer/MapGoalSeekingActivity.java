@@ -75,7 +75,26 @@ public class MapGoalSeekingActivity extends FragmentActivity
         super.onStop();
     }
 
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Back to main menu")
+                .setMessage("Are you sure you want to come back on the main menu ?\n" +
+                        "You will loose this current game.")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    }
 
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
 
 
     // callback triggered when the map is ready :
