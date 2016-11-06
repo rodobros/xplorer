@@ -25,6 +25,8 @@
     <string name="settingsTimer">Timer</string>
     <string name="game_lost">You loose the game.</string>
     <string name="back_to_menu">Back To Menu</string>
+    <string name="win_comment">Congratulations! You won the game.</string>
+    <string name="win_back_to_menu">Back to menu</string>
     <string-array name="settingsDifficultyList">
         <item>Easy</item>
         <item>Normal</item>

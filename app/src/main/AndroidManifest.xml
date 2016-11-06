@@ -65,7 +65,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MapGoalSeekingActivity" />
         </activity>
-        <activity android:name=".GameLostActivity"></activity>
+        <activity android:name=".GameLostActivity" />
+        <activity android:name=".GameWinActivity"></activity>
     </application>
 
 </manifest>

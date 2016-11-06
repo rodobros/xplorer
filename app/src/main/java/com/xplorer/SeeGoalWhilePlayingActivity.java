@@ -60,7 +60,7 @@ public class SeeGoalWhilePlayingActivity extends AppCompatActivity {
         if(foundIt){
             Toast.makeText(SeeGoalWhilePlayingActivity.this, "You found it! good job!", Toast.LENGTH_SHORT).show();
             PlacesOfInterestManager.getInstance().setPlaceOfInterestFound(PlacesOfInterestManager.getInstance().getCurrentGoal());
-            Intent intent = new Intent(getApplicationContext(), MainMenuActivity.class);
+            Intent intent = new Intent(getApplicationContext(), GameWinActivity.class);
             startActivity(intent);
         } else {
             nbOfValidation --;
