@@ -42,7 +42,7 @@
             android:text="Hot/Cold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/HotOrCold"
+            android:id="@+id/ButtonHotOrCold"
             android:layout_above="@+id/imageGoalThumbnail"
             android:layout_alignStart="@+id/button"
             android:layout_marginBottom="18dp"

@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainMenuActivity extends AppCompatActivity {
-
-
     Button startButton;
     Button settingsButton;
     Button statisticsButton;
@@ -18,6 +16,12 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         settingsButton = (Button)findViewById(R.id.buttonSettings);
+
+        //to be sure that the timer is canceled
+        if (MapGoalSeekingActivity.timer != null ) {
+            MapGoalSeekingActivity.timer.cancel();
+
+        }
     }
 
     public void onSettingsClick(View v) {
