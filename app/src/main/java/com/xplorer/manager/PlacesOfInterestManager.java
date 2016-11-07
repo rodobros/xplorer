@@ -147,6 +147,10 @@ public class PlacesOfInterestManager {
         listOfPlacesOfInterest.add(new PlaceOfInterest("Bruce Lee's Statue", 22.294875, 114.175711, R.drawable.bruce_lee));
         listOfPlacesOfInterest.add(new PlaceOfInterest("Bank Of China Tower", 22.2793, 114.1615, R.drawable.bank_of_china_tower));
         listOfPlacesOfInterest.add(new PlaceOfInterest("City University Hall 11", 22.33988, 114.16937, R.drawable.city_u_hall_11));
+        listOfPlacesOfInterest.add(new PlaceOfInterest("Donut UM2", 43.630951, 3.861079, R.drawable.donuts_um2));
+
+
+
     }
 
     public void setPlaceOfInterestFound(PlaceOfInterest placeOfInterest) {

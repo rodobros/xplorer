@@ -2,7 +2,6 @@ package com.xplorer;
 
 import android.app.ActionBar;
 import android.support.v4.app.NavUtils;
-import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -31,12 +30,25 @@ public class SettingsActivity extends AppCompatActivity
     EditText editTextNbOfCheck;
     SettingsManager settingsManager;
 
-    // TODO use ArrayList of data for difficulty level instead of direct value
-    // Need to change all switch case to if, as switch don't allow compute data
-    // list for knowing the level depending on the difficulty
-    ArrayList<Integer> nbOfValidationList;
-    ArrayList<Integer> nbOfCheckList;
-    ArrayList<Integer> timerList;
+
+    // CONSTANTS
+    public final int RADIUS_1KM = 1000;
+    public final int RADIUS_2_5KM = 2500;
+    public final int RADIUS_10KM = 10000;
+    public final int RADIUS_UNLIMITED = 12742000;
+
+    public final int NB_OF_VALIDATION_EASY = 1000;
+    public final int NB_OF_VALIDATION_NORMAL = 8;
+    public final int NB_OF_VALIDATION_HARD = 3;
+
+    public final int NB_OF_CHECK_EASY = 1000;
+    public final int NB_OF_CHECK_NORMAL = 15;
+    public final int NB_OF_CHECK_HARD = 7;
+
+    public final int TIMER_NONE = -1;
+    public final int TIMER_1HOUR = 36000;
+    public final int TIMER_3HOURS = 10800;
+    public final int TIMER_10HOURS = 3600;
 
 
     @Override
@@ -80,16 +92,16 @@ public class SettingsActivity extends AppCompatActivity
         this.spinnerRadius.setAdapter(adapterRadius);
         //this.spinnerRadius.setOnItemSelectedListener(this);
         switch (settingsManager.getRadiusDistance()) {
-            case 1000 :
+            case RADIUS_1KM :
                 this.spinnerRadius.setSelection(0);
                 break;
-            case 2500 :
+            case RADIUS_2_5KM :
                 this.spinnerRadius.setSelection(1);
                 break;
-            case 10000 :
+            case RADIUS_10KM :
                 this.spinnerRadius.setSelection(2);
                 break;
-            case 12742 :
+            case RADIUS_UNLIMITED :
                 this.spinnerRadius.setSelection(3);
                 break;
             default:
@@ -133,16 +145,16 @@ public class SettingsActivity extends AppCompatActivity
         this.spinnerTimer.setAdapter(adapterTimer);
         //this.spinnerTimer.setOnItemSelectedListener(this);
         switch (settingsManager.getTimer()) {
-            case -1 :
+            case TIMER_NONE :
                 this.spinnerTimer.setSelection(0);
                 break;
-            case 3600 :
+            case TIMER_1HOUR:
                 this.spinnerTimer.setSelection(1);
                 break;
-            case 10800 :
+            case TIMER_3HOURS:
                 this.spinnerTimer.setSelection(2);
                 break;
-            case 36000 :
+            case TIMER_10HOURS:
                 this.spinnerTimer.setSelection(3);
                 break;
         }
@@ -181,16 +193,16 @@ public class SettingsActivity extends AppCompatActivity
         //Radius
         switch (this.spinnerRadius.getSelectedItem().toString()) {
             case "1 KM":
-                settingsManager.setRadiusDistance(1000);
+                settingsManager.setRadiusDistance(RADIUS_1KM);
                 break;
             case "2.5 KM":
-                settingsManager.setRadiusDistance(2500);
+                settingsManager.setRadiusDistance(RADIUS_2_5KM);
                 break;
             case "10 KM":
-                settingsManager.setRadiusDistance(10000);
+                settingsManager.setRadiusDistance(RADIUS_10KM);
                 break;
             case "Unlimited":
-                settingsManager.setRadiusDistance(12742);
+                settingsManager.setRadiusDistance(RADIUS_UNLIMITED);
                 break;
         }
 
@@ -241,27 +253,27 @@ public class SettingsActivity extends AppCompatActivity
         String strCheck;
         switch (this.spinnerDifficulty.getSelectedItem().toString()) {
             case "Easy":
-                strValidation = "" + 1000;
+                strValidation = "" + NB_OF_VALIDATION_EASY;
                 this.editTextNbOfValidation.setText(strValidation);
-                strCheck = "" + 1000;
+                strCheck = "" + NB_OF_CHECK_EASY;
                 this.editTextNbOfCheck.setText(strCheck);
                 this.spinnerTypeOfInformation.setSelection(0);
                 this.spinnerTimer.setSelection(0);
                 setEditablePersonalizableFields(false);
                 break;
             case "Normal":
-                strValidation = "" + 5;
+                strValidation = "" + NB_OF_VALIDATION_NORMAL;
                 this.editTextNbOfValidation.setText(strValidation);
-                strCheck = "" + 15;
+                strCheck = "" + NB_OF_CHECK_NORMAL;
                 this.editTextNbOfCheck.setText(strCheck);
                 this.spinnerTypeOfInformation.setSelection(1);
                 this.spinnerTimer.setSelection(3);
                 setEditablePersonalizableFields(false);
                 break;
             case "Hard":
-                strValidation = "" + 3;
+                strValidation = "" + NB_OF_VALIDATION_HARD;
                 this.editTextNbOfValidation.setText(strValidation);
-                strCheck = "" + 8;
+                strCheck = "" + NB_OF_CHECK_HARD;
                 this.editTextNbOfCheck.setText(strCheck);
                 this.spinnerTypeOfInformation.setSelection(2);
                 this.spinnerTimer.setSelection(1);

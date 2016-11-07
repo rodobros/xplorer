@@ -18,6 +18,9 @@ public class SettingsManager {
     private TypeOfInformation typeOfInformation;
     private int timer;
 
+
+
+
     private SettingsManager(){
         if(ApplicationSharedPreference.getIntData(PreferencesName.ValidateGoalMinDistance.name()) != -1) {// -1 is the default value
             validateGoalMinDistance = ApplicationSharedPreference.getIntData(PreferencesName.ValidateGoalMinDistance.name()); // in meters
