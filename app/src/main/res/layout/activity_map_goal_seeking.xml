@@ -28,12 +28,23 @@
             android:layout_centerHorizontal="true"
             android:onClick="onImageGoalClick"/>
 
+        <TextView
+            android:text="@string/c"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/menu_button"
+            android:layout_alignEnd="@+id/menu_button"
+            android:layout_marginTop="16dp"
+            android:textSize="25dip"
+            android:id="@+id/thermo_degrees"
+            android:layout_toEndOf="@+id/vertical_progressbar" />
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Menu"
             android:textSize="10sp"
-            android:id="@+id/button"
+            android:id="@+id/menu_button"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:onClick="onMenuClick"/>
@@ -44,9 +55,19 @@
             android:layout_height="wrap_content"
             android:id="@+id/ButtonHotOrCold"
             android:layout_above="@+id/imageGoalThumbnail"
-            android:layout_alignStart="@+id/button"
+            android:layout_alignStart="@+id/menu_button"
             android:layout_marginBottom="18dp"
             android:onClick="onHotOrColdClick"/>
 
+        <ProgressBar
+            android:id="@+id/vertical_progressbar"
+            android:layout_width="12dip"
+            android:layout_height="300dip"
+            style="@style/Widget.ProgressBar.Vertical"
+            android:layout_above="@+id/ButtonHotOrCold"
+            android:layout_below="@+id/menu_button"
+            android:visibility="visible"
+            android:layout_centerHorizontal="true"
+            android:max="100" />
     </RelativeLayout>
 </LinearLayout>

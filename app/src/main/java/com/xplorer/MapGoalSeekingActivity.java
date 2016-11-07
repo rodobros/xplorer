@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -47,6 +48,8 @@ public class MapGoalSeekingActivity extends FragmentActivity
     private Button hotColdButton;
 
     public static CountDownTimer timer = null ;
+
+    private ProgressBar pg;
 
 
     @Override
@@ -88,6 +91,12 @@ public class MapGoalSeekingActivity extends FragmentActivity
         } else {
             timer = null;
         }
+
+        pg = (ProgressBar)findViewById(R.id.vertical_progressbar);
+
+        if (SettingsManager.getInstance().getRadiusDistance() == 124000)
+            pg.setVisibility(View.INVISIBLE);
+
     }
 
 
@@ -292,6 +301,7 @@ public class MapGoalSeekingActivity extends FragmentActivity
         } catch(SecurityException e) {
 
         }
+        updateThermometer();
     }
 
     private void updateUI() {
@@ -300,6 +310,28 @@ public class MapGoalSeekingActivity extends FragmentActivity
             updateUIFirstTime = false;
             map_.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(this.currentLocation.getLatitude(), this.currentLocation.getLongitude()), MAX_ZOOM_LEVEL));
         }
+    }
+
+    public void updateThermometer() {
+        float[] currDisArr = new float[1];
+        float currDis;
+        float initDis;
+
+        Location.distanceBetween(currentLocation.getLatitude(), currentLocation.getLongitude(),
+                PlacesOfInterestManager.getInstance().getCurrentGoal().getLatitude(),
+                PlacesOfInterestManager.getInstance().getCurrentGoal().getLongitude(), currDisArr);
+        initDis = SettingsManager.getInstance().getRadiusDistance();
+
+        currDis = currDisArr[0];
+
+        float progress;
+        if (currDis <= initDis) {
+            progress = (initDis-currDis)/initDis;
+        } else {
+            progress = 0;
+        }
+
+        pg.setProgress((int)(progress*100));
     }
 }
 
