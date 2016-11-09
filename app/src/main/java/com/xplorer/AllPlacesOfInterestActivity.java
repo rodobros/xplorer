@@ -32,7 +32,7 @@ import com.xplorer.util.PlaceOfInterestImageAdapter;
 
 public class AllPlacesOfInterestActivity extends AppCompatActivity
         implements  GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, LocationListener {
+        GoogleApiClient.OnConnectionFailedListener {
 
     private TextView textViewDistance;
 
@@ -128,7 +128,8 @@ public class AllPlacesOfInterestActivity extends AppCompatActivity
                 requestPermission(android.Manifest.permission.ACCESS_FINE_LOCATION, REQUEST_PERMISSION_PHONE_STATE);
             }
         } else {
-            startLocationUpdates();
+            Location location = getCurrentLocation();
+            initializeGridView(location);
         }
     }
 
@@ -141,7 +142,8 @@ public class AllPlacesOfInterestActivity extends AppCompatActivity
             case REQUEST_PERMISSION_PHONE_STATE:
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    startLocationUpdates();
+                    Location location = getCurrentLocation();
+                    initializeGridView(location);
                 } else {
                     Toast.makeText(AllPlacesOfInterestActivity.this, "Permission Denied!", Toast.LENGTH_SHORT).show();
                 }
@@ -169,42 +171,39 @@ public class AllPlacesOfInterestActivity extends AppCompatActivity
     }
 
     // code to start and track locations updates:
-    protected void startLocationUpdates() {
+    protected Location getCurrentLocation() {
+        Location mLastLocation = null;
         try {
-            LocationServices.FusedLocationApi.requestLocationUpdates(
-                    mGoogleApiClient, createLocationRequest(), this);
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                    mGoogleApiClient);
+            if(mLastLocation == null){
+                // if unable to get position, provide a mock one.
+                mLastLocation = new Location("fake provider");
+                mLastLocation.setLatitude(22.3321);
+                mLastLocation.setLongitude(114.19);
+            }
         } catch(SecurityException e) {
             Log.e("location", "permission denied");
         }
+        return mLastLocation;
     }
 
-    protected LocationRequest createLocationRequest() {
-        LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(10000);
-        mLocationRequest.setFastestInterval(5000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        return mLocationRequest;
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        currentLocation = location;
-        this.initializeGridView();
-    }
     ////////////////////// END GETTING THE LOCATION /////////////////////////////
 
     /**
      * Method called when the location is initialized
      */
-    private void initializeGridView() {
-        if (! gridViewInitialized) {
+    private void initializeGridView(Location location) {
             myPlaceOfInterestImageAdapter = new PlaceOfInterestImageAdapter(this);
             myPlaceOfInterestImageAdapter.addPlacesOfInterest(
                     PlacesOfInterestManager.getInstance().getListOfClosePlacesOfInterest(
-                            currentLocation.getLatitude(), currentLocation.getLongitude(),
+                            location.getLatitude(), location.getLongitude(),
                             SettingsManager.getInstance().getRadiusDistance()));
 
             GridView gridview = (GridView) findViewById(R.id.imageGridView);
+            Log.d("GRID WIDTH:", ""+ gridview.getWidth());
+            gridview.setColumnWidth(gridview.getWidth() / 3);
+            myPlaceOfInterestImageAdapter.setImageWidth(gridview.getWidth() / 3);
             gridview.setAdapter(myPlaceOfInterestImageAdapter);
 
             gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -213,9 +212,6 @@ public class AllPlacesOfInterestActivity extends AppCompatActivity
                     onClickItem(position);
                 }
             });
-
-            gridViewInitialized = true;
-        }
     }
 
 

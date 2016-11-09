@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class PlaceOfInterestImageAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<PlaceOfInterest> pictures;
-    int sizeImage;
+    private int imageWidth_ = 85;
 
 
     public PlaceOfInterestImageAdapter(Context c) {
@@ -30,7 +30,6 @@ public class PlaceOfInterestImageAdapter extends BaseAdapter {
 
         WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
-        sizeImage = display.getWidth() / 3 - display.getWidth()/25;
     }
 
     public int getCount() {
@@ -55,7 +54,7 @@ public class PlaceOfInterestImageAdapter extends BaseAdapter {
             // I tried to do something depending on the size of the screen, don't seems to work really great ...
             // I'm also using deprecated methods .getWidth()
             // TODO Solve the grid view size of elements problem
-            imageView.setLayoutParams(new GridView.LayoutParams(sizeImage, sizeImage));
+            imageView.setLayoutParams(new GridView.LayoutParams(imageWidth_, imageWidth_));
 
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(8, 8, 8, 8);
@@ -85,6 +84,10 @@ public class PlaceOfInterestImageAdapter extends BaseAdapter {
         for(int i = 0 ; i < value.size() ; ++i) {
             addPlaceOfInterest(value.get(i));
         }
+    }
+
+    public void setImageWidth(int width){
+        imageWidth_ = width;
     }
 
 }

@@ -66,7 +66,7 @@ public class PlacesOfInterestManager {
         for(int i = 0 ; i < listOfPlacesOfInterest.size() ; ++i) {
             currentPlace = listOfPlacesOfInterest.get(i);
             Location.distanceBetween(latitude, longitude, currentPlace.getLatitude(), currentPlace.getLongitude(), results);
-            if (results[0] < radius
+            if ((results[0] < radius || radius == 12742000)
                     && !ApplicationSharedPreference.getBoolData(currentPlace.getName() + "isValidated")) {
                 listOfClosePlacesOfInterest.add(currentPlace);
             }
