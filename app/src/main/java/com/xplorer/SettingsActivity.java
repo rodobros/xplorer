@@ -247,6 +247,13 @@ public class SettingsActivity extends AppCompatActivity
 
     }
 
+    /**
+     * This method is called when a difficulty is chosen.
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String strValidation ;
