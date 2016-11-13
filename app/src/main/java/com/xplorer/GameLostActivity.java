@@ -6,10 +6,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.xplorer.manager.PlacesOfInterestManager;
 import com.xplorer.manager.SettingsManager;
+import com.xplorer.util.DownloadImageTask;
 
 public class GameLostActivity extends AppCompatActivity {
     TextView textViewTypeOfLoose;
@@ -42,6 +47,14 @@ public class GameLostActivity extends AppCompatActivity {
             MapGoalSeekingActivity.timer.cancel();
 
         }
+
+        ImageView img = (ImageView) findViewById(R.id.placeOfInterestLocationImageView);
+
+        String lat = PlacesOfInterestManager.getInstance().getCurrentGoal().getLatitude().toString();
+        String lng = PlacesOfInterestManager.getInstance().getCurrentGoal().getLongitude().toString();
+        String googleMapImageUrl = "http://maps.google.com/maps/api/staticmap?center=" + lat + "," + lng + "&zoom=15&size=" + 400 + "x" + 300 + "&sensor=false&markers=color:blue%7Clabel:1%7C" + lat + "," + lng;
+        DownloadImageTask downloader = new DownloadImageTask(img);
+        downloader.execute(googleMapImageUrl);
     }
 
     public void onClickBackToMenu(View view) {

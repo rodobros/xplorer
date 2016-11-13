@@ -201,7 +201,6 @@ public class AllPlacesOfInterestActivity extends AppCompatActivity
                             SettingsManager.getInstance().getRadiusDistance()));
 
             GridView gridview = (GridView) findViewById(R.id.imageGridView);
-            Log.d("GRID WIDTH:", ""+ gridview.getWidth());
             gridview.setColumnWidth(gridview.getWidth() / 3);
             myPlaceOfInterestImageAdapter.setImageWidth(gridview.getWidth() / 3);
             gridview.setAdapter(myPlaceOfInterestImageAdapter);

@@ -1,36 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:baselineAligned="false">
+<RelativeLayout
     android:id="@+id/activity_game_lost"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.xplorer.GameLostActivity">
-
-    <TextView
-        android:text="@string/game_lost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/textViewYouLoose"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"/>
-    <TextView
-        android:text="@string/game_lost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/textViewYouLoose"
-        android:id="@+id/textViewTypeOfLoose"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
-
+    android:layout_height="0dp"
+    android:layout_weight="1">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/back_to_menu"
         android:id="@+id/buttonLostGameBackMenu"
-        android:onClick="onClickBackToMenu"/>
+        android:onClick="onClickBackToMenu"
+        android:layout_above="@+id/textViewYouLoose"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:text="@string/game_lost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewYouLoose"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+        android:layout_above="@+id/textViewTypeOfLoose"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:text="@string/game_lost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewTypeOfLoose"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:id="@+id/mapSolutionImageContainer">
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="300dp"
+        android:id="@+id/placeOfInterestLocationImageView"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
+</LinearLayout>
