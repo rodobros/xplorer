@@ -51,9 +51,6 @@ public class PlaceOfInterestImageAdapter extends BaseAdapter {
             // if it's not recycled, initialize some attributes
             imageView = new ImageView(mContext);
 
-            // I tried to do something depending on the size of the screen, don't seems to work really great ...
-            // I'm also using deprecated methods .getWidth()
-            // TODO Solve the grid view size of elements problem
             imageView.setLayoutParams(new GridView.LayoutParams(imageWidth_, imageWidth_));
 
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

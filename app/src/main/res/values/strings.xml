@@ -28,6 +28,7 @@
     <string name="win_comment">Congratulations! You won the game.</string>
     <string name="win_back_to_menu">Back to menu</string>
     <string name="c">°C</string>
+    <string name="menu">Menu</string>
     <string-array name="settingsDifficultyList">
         <item>Easy</item>
         <item>Normal</item>
@@ -43,7 +44,6 @@
     <string-array name="settingsTypeOfInformation">
         <item>Title + Image</item>
         <item>Image</item>
-        <item>Randomized Image</item>
     </string-array>
     <string-array name="settingsTimer">
         <item>None</item>
