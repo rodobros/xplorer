@@ -18,7 +18,11 @@ public class PlacesOfInterestManager {
     private static PlacesOfInterestManager instance;
 
     private ArrayList<PlaceOfInterest> listOfPlacesOfInterest = new ArrayList<PlaceOfInterest>();
+    private  ArrayList<PlaceOfInterest> listOfFoundPlacesOfInterest = new ArrayList<PlaceOfInterest>();
     private PlaceOfInterest currentGoal = new PlaceOfInterest("default", 0.0,0.0,1);
+    private  String[] nameOfFoundPlaces;
+    private  Integer[] imgOfFoundPlaces;
+    private  String[] nameOfFoundCoord;
 
     private int currentNumberOfValidation;
     private int currentNumberOfCheck;
@@ -42,6 +46,50 @@ public class PlacesOfInterestManager {
     }
 
 
+
+
+
+    /////////////////// returns a string array with the name of all the found place
+    public  String[] getStringArrayOfNames() {
+
+        nameOfFoundPlaces = new String[listOfFoundPlacesOfInterest.size()];
+
+        for(int i=0; i< listOfFoundPlacesOfInterest.size(); i++) {
+            nameOfFoundPlaces[i] = listOfFoundPlacesOfInterest.get(i).getName();
+        }
+        return nameOfFoundPlaces;
+    }
+
+
+    /////////////////// returns a Integer array with the imgageID of all the found place
+    public Integer[] getIntArrayOfImages() {
+
+        imgOfFoundPlaces = new Integer[listOfFoundPlacesOfInterest.size()];
+
+        for(int i=0; i< listOfFoundPlacesOfInterest.size(); i++) {
+            imgOfFoundPlaces[i] = listOfFoundPlacesOfInterest.get(i).getDrawableID();
+        }
+        return imgOfFoundPlaces;
+    }
+
+
+    /////////////////// returns a string array with the coordinates of all the found place
+    public  String[] getStringArrayOfCoords() {
+
+        nameOfFoundCoord = new String[listOfFoundPlacesOfInterest.size()];
+
+        for(int i=0; i< listOfFoundPlacesOfInterest.size(); i++) {
+            nameOfFoundCoord[i] = listOfFoundPlacesOfInterest.get(i).getStringOfCoords();
+        }
+        return nameOfFoundCoord;
+    }
+
+
+
+
+
+
+
     /////////////////// getter list of interest
 
     /**
@@ -58,8 +106,8 @@ public class PlacesOfInterestManager {
      * @return return all places of interest which within the radius.
      */
     public ArrayList<PlaceOfInterest> getListOfClosePlacesOfInterest(Double latitude, Double longitude, int radius) {
-        ArrayList<PlaceOfInterest> listOfClosePlacesOfInterest = new ArrayList<PlaceOfInterest>();
 
+        ArrayList<PlaceOfInterest> listOfClosePlacesOfInterest = new ArrayList<PlaceOfInterest>();
         PlaceOfInterest currentPlace ;
         float[] results = new float[1];
 
@@ -127,7 +175,7 @@ public class PlacesOfInterestManager {
      */
     public void resetAllPlacesFound() {
         listOfPlacesOfInterest.clear();
-
+listOfFoundPlacesOfInterest.clear();
         this.addAllPlacesOfInterest();
 
         for(int i = 0 ; i < listOfPlacesOfInterest.size() ; ++i) {
@@ -155,6 +203,7 @@ public class PlacesOfInterestManager {
     public void setPlaceOfInterestFound(PlaceOfInterest placeOfInterest) {
         ApplicationSharedPreference.saveBoolData(placeOfInterest.getName() + "isValidated", Boolean.TRUE);
         listOfPlacesOfInterest.remove(placeOfInterest);
+        listOfFoundPlacesOfInterest.add(placeOfInterest);
     }
 
     private void resetPlaceOfInterestFound(PlaceOfInterest placeOfInterest) {
@@ -169,5 +218,6 @@ public class PlacesOfInterestManager {
         this.setCurrentNumberOfCheck(SettingsManager.getInstance().getMaxNumberOfCheck());
         this.setCurrentTimer(SettingsManager.getInstance().getTimer());
     }
+
 
 }
