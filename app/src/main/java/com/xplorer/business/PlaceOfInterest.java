@@ -42,4 +42,10 @@ public class PlaceOfInterest {
     public int getDrawableID() {
         return drawableID_;
     }
+
+    public String getStringOfCoords() {
+        String stringOfCoords = longitude_.toString()+", "+latitude_.toString();
+        return stringOfCoords;
+    }
+
 }

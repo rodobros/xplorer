@@ -132,9 +132,11 @@ public class SettingsActivity extends AppCompatActivity
             case Image:
                 this.spinnerTypeOfInformation.setSelection(1);
                 break;
-            case RandomizedImage:
+            /*case RandomizedImage:
                 this.spinnerTypeOfInformation.setSelection(2);
-                break;
+                break;*/
+            default:
+                this.spinnerTypeOfInformation.setSelection(1);
         }
 
         // Timer
@@ -158,8 +160,6 @@ public class SettingsActivity extends AppCompatActivity
                 this.spinnerTimer.setSelection(3);
                 break;
         }
-
-        // TODO add item listener on the difficulty this.spinnerDifficulty.setVisibility(View.GONE);
     }
 
     @Override
@@ -222,9 +222,9 @@ public class SettingsActivity extends AppCompatActivity
             case "Image":
                 settingsManager.setTypeOfInformation(TypeOfInformation.Image);
                 break;
-            case "Randomized Image" :
+            /*case "Randomized Image" :
                 settingsManager.setTypeOfInformation(TypeOfInformation.RandomizedImage);
-                break;
+                break;*/
         }
 
         //Timer
@@ -282,7 +282,7 @@ public class SettingsActivity extends AppCompatActivity
                 this.editTextNbOfValidation.setText(strValidation);
                 strCheck = "" + NB_OF_CHECK_HARD;
                 this.editTextNbOfCheck.setText(strCheck);
-                this.spinnerTypeOfInformation.setSelection(2);
+                this.spinnerTypeOfInformation.setSelection(1);
                 this.spinnerTimer.setSelection(1);
                 setEditablePersonalizableFields(false);
                 break;

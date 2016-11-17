@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -46,10 +47,11 @@ public class MapGoalSeekingActivity extends FragmentActivity
     private Location previousLocation;
 
     private Button hotColdButton;
+    private TextView timeRemainingTextView;
+    private ProgressBar pg;
 
     public static CountDownTimer timer = null ;
 
-    private ProgressBar pg;
 
 
     @Override
@@ -72,13 +74,30 @@ public class MapGoalSeekingActivity extends FragmentActivity
 
         ((ImageView)findViewById(R.id.imageGoalThumbnail)).setImageResource(PlacesOfInterestManager.getInstance().getCurrentGoal().getDrawableID());
         hotColdButton = (Button) findViewById(R.id.ButtonHotOrCold);
+        timeRemainingTextView = (TextView) findViewById(R.id.remaingingTime);
 
         // to launch the timer if a timer is set
         if (SettingsManager.getInstance().getTimer() != -1) {
+            timeRemainingTextView.setVisibility(View.VISIBLE);
+
             timer = new CountDownTimer(PlacesOfInterestManager.getInstance().getCurrentTimer() * 1000 , 1000) {
                 public void onTick(long millisUntilFinished) {
                     // TODO set a TextView to display remaining time
-                    // hotColdButton.setText("seconds remaining: " + millisUntilFinished / 1000);
+                    String timeRemaining = "";
+
+                    int secondsUntilFinished = (int) (millisUntilFinished / 1000);
+                    int hours = secondsUntilFinished / 3600;
+                    int minutes = secondsUntilFinished % 3600 / 60 ;
+                    int seconds = secondsUntilFinished % 60 ;
+
+                    if (hours > 0) {
+                        timeRemaining = "Time left: \n" + hours + ":" + minutes + ":" + seconds ;
+                    } else {
+                        timeRemaining = "Time left: \n"+ minutes + ":" + seconds;
+                    }
+
+
+                    timeRemainingTextView.setText(timeRemaining);
                 }
 
                 public void onFinish() {
