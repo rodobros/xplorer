@@ -32,6 +32,21 @@ public class PlacesOfInterestManager {
     private PlacesOfInterestManager() {
         // to initialize all places of interest (currently hard coded)
         this.addAllPlacesOfInterest();
+        this.initFoundPlacesInterest();
+    }
+
+    private void initFoundPlacesInterest() {
+        listOfFoundPlacesOfInterest.clear();
+        addFoundPlaceOfInterest(new PlaceOfInterest("City University Hong Kong", 22.33707, 114.172711, R.drawable.city_u));
+        addFoundPlaceOfInterest(new PlaceOfInterest("Festival Walk Ice Ring", 22.3379, 114.174022, R.drawable.festival_walk));
+        addFoundPlaceOfInterest(new PlaceOfInterest("Lion rock", 22.3523, 114.1870, R.drawable.lion_rock));
+        addFoundPlaceOfInterest(new PlaceOfInterest("Kowloon Walled City Park", 22.3321, 114.1903, R.drawable.kowloon_walled_city_park));
+        addFoundPlaceOfInterest(new PlaceOfInterest("Bruce Lee's Statue", 22.294875, 114.175711, R.drawable.bruce_lee));
+        addFoundPlaceOfInterest(new PlaceOfInterest("Bank Of China Tower", 22.2793, 114.1615, R.drawable.bank_of_china_tower));
+        addFoundPlaceOfInterest(new PlaceOfInterest("City University Hall 11", 22.33988, 114.16937, R.drawable.city_u_hall_11));
+        addFoundPlaceOfInterest(new PlaceOfInterest("Donut UM2", 43.630951, 3.861079, R.drawable.donuts_um2));
+        addFoundPlaceOfInterest(new PlaceOfInterest("Langhan Place", 22.319126, 114.168587, R.drawable.langhan_place));
+        addFoundPlaceOfInterest(new PlaceOfInterest("Mansun House", 22.316278, 114.169323, R.drawable.mansun_house));
     }
 
     /**
@@ -164,9 +179,9 @@ public class PlacesOfInterestManager {
      * @param placeOfInterest add this place of interest to the list of all places of interest
      *                        if this place is not already found.
      */
-    private void addNewPlaceOfInterest(PlaceOfInterest placeOfInterest) {
-        if(!ApplicationSharedPreference.getBoolData(placeOfInterest.getName() + "isValidated")) {
-            listOfPlacesOfInterest.add(placeOfInterest);
+    private void addFoundPlaceOfInterest(PlaceOfInterest placeOfInterest) {
+        if(ApplicationSharedPreference.getBoolData(placeOfInterest.getName() + "isValidated")) {
+            listOfFoundPlacesOfInterest.add(placeOfInterest);
         }
     }
 
@@ -175,7 +190,7 @@ public class PlacesOfInterestManager {
      */
     public void resetAllPlacesFound() {
         listOfPlacesOfInterest.clear();
-listOfFoundPlacesOfInterest.clear();
+        listOfFoundPlacesOfInterest.clear();
         this.addAllPlacesOfInterest();
 
         for(int i = 0 ; i < listOfPlacesOfInterest.size() ; ++i) {

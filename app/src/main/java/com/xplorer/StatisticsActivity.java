@@ -19,10 +19,10 @@ import android.widget.TextView;
 import com.xplorer.manager.PlacesOfInterestManager;
 import com.xplorer.util.CustomListAdapter;
 
-public class StatisticsActivity extends Activity {
+public class StatisticsActivity extends AppCompatActivity {
 
 
-ListView list;
+    ListView list;
     String[] itemname;
     Integer[] imgid;
     String[] itemcoords;
@@ -33,9 +33,9 @@ ListView list;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_statistics);
         ActionBar a = getActionBar();
-
         if(a != null) {
             a.setDisplayHomeAsUpEnabled(true);
+
         }
 
         itemname= PlacesOfInterestManager.getInstance().getStringArrayOfNames();
